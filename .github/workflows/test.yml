@@ -1,0 +1,20 @@
+name: Selenium and WebDriver
+
+on:
+  - push
+
+jobs:
+  selenium-and-webdriver:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm ci
+      - run: sudo safaridriver --enable
+      - run: node index.js
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./image.png
